@@ -20,6 +20,8 @@ import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule }    from '@angular/common/http';
 import { AuthService } from './service/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+
 
  
 
@@ -61,7 +63,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgbModule.forRoot()
   ],
-  providers: [AuthService],
+  providers: [AuthService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
