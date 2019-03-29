@@ -10,9 +10,11 @@ import { SharedService } from '../util/shared.service';
 })
 export class AuthService {
 
+
   constructor(private http: HttpClient, private cookieService: CookieService,private route:Router,private data: SharedService) { }
 
   obtainAccessToken(loginData) {
+
     
     let params = new URLSearchParams();
     params.append('username', loginData.username);
@@ -63,5 +65,6 @@ export class AuthService {
 
   logout(){
     this.cookieService.delete('access_token');
+
   }
 }

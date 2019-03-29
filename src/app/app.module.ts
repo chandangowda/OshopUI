@@ -21,8 +21,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+
 import { SharedService } from './util/shared.service';
 import { AuthGuardService } from './auth-guard.service';
+
 
 
 
@@ -36,7 +38,7 @@ const routes: Routes = [
   
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
-  { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService] }
+  { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService] },
 
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService] },
@@ -67,7 +69,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgbModule.forRoot()
   ],
+
   providers: [AuthService, CookieService, SharedService, AuthGuardService],
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
