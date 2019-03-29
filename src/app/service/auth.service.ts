@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { SharedService } from '../util/shared.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService,private route:Router,private data: SharedService) { }
 
-   obtainAccessToken(loginData) {
-     console.log(loginData);
+  obtainAccessToken(loginData) {
+    
     let params = new URLSearchParams();
     params.append('username', loginData.username);
     params.append('password', loginData.password);
@@ -20,10 +24,44 @@ export class AuthService {
     let options = {
       headers: headers
     }
-    
 
-    this.http.post("http://localhost:8777/auth-api/oauth/token",params.toString(),options)
-    .subscribe(response=>console.log(response));
 
+    this.http.post("http://35.200.215.246:8777/auth-api/oauth/token", params.toString(), options)
+      .subscribe(response => {
+        this.saveToken(response);
+        
+      });
+
+     
+
+  }
+
+  saveToken(token) {
+    var expireDate = new Date().getTime() + (1000 * token.expires_in);
+    this.cookieService.set("access_token", token.access_token, expireDate);
+   
+    this.callGet();
+    this.data.changeflag(true);
+   
+    this.route.navigate(['/']);
+   
+  }
+
+  callGet() {
+    let token=this.cookieService.get('access_token');
+    let headers = new HttpHeaders({ 'Content-type': 'application/json; charset=utf-8', 'Authorization': 'Bearer ' + token });
+    let options: {
+      headers?: HttpHeaders,
+      responseType: 'text',
+    } = {
+      headers: headers,
+      responseType: 'text'
+    };
+    this.http.get('http://35.200.215.246:8777/product-api/test123',options)
+      .subscribe(res=>console.log(res));
+  }
+
+  logout(){
+    this.cookieService.delete('access_token');
   }
 }

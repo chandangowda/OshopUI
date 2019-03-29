@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../service/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { SharedService } from '../util/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bs-navbar',
@@ -7,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BsNavbarComponent implements OnInit {
 
-  constructor() { }
+  tokenValue:boolean;
+
+  constructor(private authService:AuthService,private cookieService: CookieService,private data: SharedService,private route:Router) { }
 
   ngOnInit() {
+    
+    this.data.currentTokenValue.subscribe(flag=>{
+    this.tokenValue=flag})
+  }
+
+  
+  
+
+  logout(){
+    
+    this.authService.logout();
+    this.data.changeflag(false);
+    this.route.navigate(['/login']);
   }
 
 }

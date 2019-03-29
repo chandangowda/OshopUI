@@ -16,25 +16,31 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material/material.module';
-import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './service/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { SharedService } from './util/shared.service';
+import { AuthGuardService } from './auth-guard.service';
 
- 
+
 
 
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'shopping-cart', component: ShoppingCartComponent } ,
-  { path: 'check-out', component: CheckOutComponent } ,
-  { path: 'order-success', component: OrderSuccessComponent },
-  { path: 'login', component: LoginComponent } ,
-  { path: 'admin/products', component: AdminProductsComponent },
-  { path: 'admin/orders', component: AdminOrdersComponent },
-  { path: 'my/orders', component:MyOrdersComponent}         
+  { path: 'shopping-cart', component: ShoppingCartComponent },
+  
+  { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
+  { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
+  { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService] }
+
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService] },
+  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService] },
+  
 ];
 @NgModule({
   declarations: [
@@ -49,19 +55,19 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule ,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
     RouterModule.forRoot(routes),
     NgbModule.forRoot()
   ],
-  providers: [AuthService],
+  providers: [AuthService, CookieService, SharedService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
