@@ -24,6 +24,8 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { SharedService } from './util/shared.service';
 import { AuthGuardService } from './auth-guard.service';
+import { UserService } from './service/user.service';
+import { AdminAuthGuardService } from './service/admin-auth-guard.service';
 
 
 
@@ -70,7 +72,7 @@ const routes: Routes = [
     NgbModule.forRoot()
   ],
 
-  providers: [AuthService, CookieService, SharedService, AuthGuardService],
+  providers: [AuthService,AdminAuthGuardService, CookieService, SharedService,UserService, AuthGuardService],
 
 
   bootstrap: [AppComponent]

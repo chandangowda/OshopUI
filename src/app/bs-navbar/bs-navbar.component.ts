@@ -25,7 +25,6 @@ export class BsNavbarComponent implements OnInit {
   
 
   logout(){
-    
     this.authService.logout();
     this.data.changeflag(false);
     this.route.navigate(['/login']);

@@ -7,7 +7,7 @@ import {BehaviorSubject} from 'rxjs';
 export class SharedService {
   private messageSource = new BehaviorSubject<boolean>(false);
   currentTokenValue = this.messageSource.asObservable();
-  constructor() { }
+  constructor() { }  
 
   changeflag(token: boolean) {
     this.messageSource.next(token);
