@@ -31,7 +31,6 @@ export class AuthService {
       });
 
       this.user['userName']=loginData.username;
-      this.user['userEmail']='abc@gmail.com';
       localStorage.setItem('user',JSON.stringify(this.user));
       
 
@@ -59,7 +58,7 @@ export class AuthService {
   }
 
   logout(){
+    localStorage.removeItem('access_token');
     this.cookieService.delete('access_token');
-
   }
 }

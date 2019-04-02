@@ -9,7 +9,7 @@ export class AdminAuthGuardService implements CanActivate {
 
 
   canActivate(){
-
+    return false;
   }
 
   constructor() { }
