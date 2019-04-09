@@ -3,6 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { SharedService } from '../util/shared.service';
+import { Observable } from 'rxjs';
+import { UserResponse } from 'src/model/userResponse';
+import { UserService } from './user.service';
+import { User } from 'src/model/user';
 
 
 @Injectable({
@@ -13,7 +17,12 @@ export class AuthService {
   user:any={};
 
 
-  constructor(private http: HttpClient, private cookieService: CookieService,private route:Router,private data: SharedService) { }
+  constructor(private http: HttpClient, 
+    private cookieService: CookieService,
+    private route:Router,
+    private data: SharedService,
+    private userService:UserService
+    ) { }
 
   obtainAccessToken(loginData) {
     let params = new URLSearchParams();
@@ -27,11 +36,17 @@ export class AuthService {
     }
     this.http.post("http://35.200.215.246:8777/auth-api/oauth/token", params.toString(), options)
       .subscribe(response => {
-        this.saveToken(response);    
+        
+        let userInfo:User=new User();
+        userInfo.userName=loginData.username;
+       // let gmail=this.makeid(5)+"@gmail.com"
+       userInfo.userEmail='zvDSy@gmail.com';
+      
+        localStorage.setItem('user',JSON.stringify(userInfo));
+        this.saveToken(response);      
       });
 
-      this.user['userName']=loginData.username;
-      localStorage.setItem('user',JSON.stringify(this.user));
+     
       
 
   }
@@ -41,6 +56,16 @@ export class AuthService {
     this.cookieService.set("access_token", token.access_token, expireDate);
     localStorage.setItem('access_token',token.access_token);
     this.data.changeflag(true);
+  }
+
+  makeid(length) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < length; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return text;
   }
 
   callGet() {
@@ -59,6 +84,11 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem('access_token');
+    localStorage.removeItem('user')
     this.cookieService.delete('access_token');
+  }
+
+   appUser() :Observable<UserResponse>{
+    return this.userService.getUser()
   }
 }

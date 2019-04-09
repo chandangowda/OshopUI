@@ -16,7 +16,7 @@ export class AppComponent {
       sharedServ.currentTokenValue.subscribe(flag =>{
         
         if(flag){
-            userService.saveUser();
+            //userService.saveUser();
             let returnUrl=localStorage.getItem('returnUrl');
             route.navigateByUrl(returnUrl);
         }

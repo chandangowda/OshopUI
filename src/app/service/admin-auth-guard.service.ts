@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
+import { SharedService } from '../util/shared.service';
+import { Observable,of, BehaviorSubject } from 'rxjs';
+import { map,switchMap, catchError } from 'rxjs/operators';
+import { UserService } from './user.service';
+import { AuthService } from './auth.service';
+
 
 
 @Injectable({
@@ -8,9 +14,27 @@ import { CanActivate } from '@angular/router';
 export class AdminAuthGuardService implements CanActivate {
 
 
-  canActivate(){
-    return false;
-  }
+  
 
-  constructor() { }
+  constructor(private sharedServ: SharedService,
+    private userService:UserService,private router:Router,
+    private authService:AuthService) { }
+
+  canActivate(){
+   
+    return this.authService.appUser().pipe(map(user => {
+     
+      if (user.userList[0] && user.userList[0].role && user.userList[0].role==='admin') {
+          return true;
+      }else{
+        this.router.navigate(['/']);
+        return false;
+      }
+  })).pipe(catchError(() => {
+      this.router.navigate(['/']);
+      return of(false);
+  }));
+    
+    
+ }
 }

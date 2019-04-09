@@ -26,6 +26,9 @@ import { SharedService } from './util/shared.service';
 import { AuthGuardService } from './auth-guard.service';
 import { UserService } from './service/user.service';
 import { AdminAuthGuardService } from './service/admin-auth-guard.service';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { CategoryService } from './service/category.service';
+
 
 
 
@@ -37,14 +40,15 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
-  
+
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
   { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
 
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService] },
-  { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService] },
-  
+
 ];
 @NgModule({
   declarations: [
@@ -59,6 +63,7 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
+    ProductFormComponent,
 
   ],
   imports: [
@@ -72,7 +77,15 @@ const routes: Routes = [
     NgbModule.forRoot()
   ],
 
-  providers: [AuthService,AdminAuthGuardService, CookieService, SharedService,UserService, AuthGuardService],
+  providers: [
+    AuthService, 
+    CookieService, 
+    SharedService, 
+    UserService, 
+    AuthGuardService, 
+    AdminAuthGuardService,
+    CategoryService
+  ],
 
 
   bootstrap: [AppComponent]
