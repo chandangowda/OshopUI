@@ -28,6 +28,7 @@ import { UserService } from './service/user.service';
 import { AdminAuthGuardService } from './service/admin-auth-guard.service';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { CategoryService } from './service/category.service';
+import { ProductService } from './service/product.service';
 
 
 
@@ -84,7 +85,8 @@ const routes: Routes = [
     UserService, 
     AuthGuardService, 
     AdminAuthGuardService,
-    CategoryService
+    CategoryService,
+    ProductService
   ],
 
 
