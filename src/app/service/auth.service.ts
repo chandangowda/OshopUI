@@ -34,7 +34,7 @@ export class AuthService {
     let options = {
       headers: headers
     }
-    this.http.post("http://35.200.215.246:8777/auth-api/oauth/token", params.toString(), options)
+    this.http.post("http://localhost:8777/auth-api/oauth/token", params.toString(), options)
       .subscribe(response => {
         
         let userInfo:User=new User();
@@ -78,7 +78,7 @@ export class AuthService {
       headers: headers,
       responseType: 'text'
     };
-    this.http.get('http://35.200.215.246:8777/product-api/test123',options)
+    this.http.get('http://localhost:8777/product-api/test123',options)
       .subscribe(res=>console.log(res));
   }
 

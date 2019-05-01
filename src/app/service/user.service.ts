@@ -27,7 +27,7 @@ export class UserService {
      this.user['role']='admin';
     // this.user['zvDSy@gmail.com']='';
      localStorage.setItem('user',this.user);
-    this.http.post('http://35.200.215.246:8777/user-api/user/saveuser',this.user,options)
+    this.http.post('http://localhost:8777/user-api/user/saveuser',this.user,options)
       .subscribe(res=>console.log(res));
   }
 
@@ -41,7 +41,7 @@ export class UserService {
     };
     let userData:User=JSON.parse(localStorage.getItem('user'));
     
-    return this.http.post<UserResponse>('http://35.200.215.246:8777/user-api/user/getuser',userData,options)
+    return this.http.post<UserResponse>('http://localhost:8777/user-api/user/getuser',userData,options)
       ;
 
   }

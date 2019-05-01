@@ -1,15 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ProductService } from 'src/app/service/product.service';
+import { Product } from 'src/model/product';
+import { Subscription } from 'rxjs';
+import { DataTableResource } from 'angular7-data-table';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnInit, OnDestroy {
+  product: Product[];
+  filteredProduct: Product[];
+  subscription: Subscription;
+  tableResource: DataTableResource<Product>
+  items: Product[]=[];
+  itemCount: number;
 
-  constructor() { }
+  constructor(private productService: ProductService) {
+    this.subscription = this.productService.getAll().subscribe(productResponse => {
+      this.filteredProduct = this.product = productResponse.productResponseList
+      this.initializeTable(productResponse.productResponseList);
+    });
+
+  }
+
+  reloadItems(event){
+    if(!this.tableResource) return;
+    this.tableResource.query(event)
+    .then(items => this.items = items)
+  }
+
+
+  private initializeTable(product: Product[]) {
+    this.tableResource = new DataTableResource(product);
+    this.tableResource.query({ offset: 0 })
+      .then(items => this.items = items)
+    this.tableResource.count()
+      .then(count => this.itemCount = count)
+  }
+  filter(query: string) {
+
+    this.filteredProduct = (query) ?
+      this.product.filter(p => {
+        return p.title.toLowerCase().includes(query.toLowerCase())
+      }) : this.product;
+
+
+  }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

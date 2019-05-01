@@ -20,7 +20,7 @@ export class CategoryService {
       headers: headers
     };
 
-    return this.http.get<CategoryResponse>('http://35.200.215.246:8777/product-api/category/getall/',options)
+    return this.http.get<CategoryResponse>('http://localhost:8777/product-api/category/getall/',options)
   }
 
   getSingleCategory(catid):Observable<CategoryResponse>{
@@ -32,7 +32,7 @@ export class CategoryService {
       headers: headers
     };
 
-    return this.http.get<CategoryResponse>('http://35.200.215.246:8777/product-api/category/getbycatgory/'+catid,options)
+    return this.http.get<CategoryResponse>('http://localhost:8777/product-api/category/getbycatgory/'+catid,options)
   }
 
 

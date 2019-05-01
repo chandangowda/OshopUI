@@ -29,6 +29,10 @@ import { AdminAuthGuardService } from './service/admin-auth-guard.service';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { CategoryService } from './service/category.service';
 import { ProductService } from './service/product.service';
+import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular7-data-table';
+
+
 
 
 
@@ -45,10 +49,11 @@ const routes: Routes = [
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
   { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService] },
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
   { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
-
+  { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+  
 
 ];
 @NgModule({
@@ -74,6 +79,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    CustomFormsModule,
+    DataTableModule.forRoot(),
     RouterModule.forRoot(routes),
     NgbModule.forRoot()
   ],
