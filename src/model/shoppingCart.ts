@@ -1,4 +1,7 @@
+import { Item } from './item';
+
 export class ShoppingCart{
     id:string;
-    dateCreated:string
+    dateCreated:string;
+    items:Item[]
 }
