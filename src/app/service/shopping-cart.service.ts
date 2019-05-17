@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { ShoppingCartResponse } from 'src/model/shoppingCartResponse';
 import { Product } from 'src/model/product';
 import {take } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { from } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,26 +29,23 @@ export class ShoppingCartService {
 
   }
 
-    getCart():Observable<ShoppingCartResponse>{
-    let cartId=  this.getOrCreateCartId();
-    let cartNum;
-    cartId.then(res=>{
-      cartNum=res;
-    })
+   async  getCart() :Promise<Observable<ShoppingCartResponse>>{
 
-    let token=this.cookieService.get('access_token');  
-    let headers = new HttpHeaders({ 'Content-type': 'application/json; charset=utf-8', 'Authorization': 'Bearer ' + token });
-    let options: {
-      headers?: HttpHeaders
-    } = {
-      headers: headers
-    };
-    return this.http.get<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/getcart'+cartNum,options);
-
-   
-
+     
+    let cartId= await   this.getOrCreateCartId();
+      
     
-
+      let token=this.cookieService.get('access_token');  
+      let headers = new HttpHeaders({ 'Content-type': 'application/json; charset=utf-8', 'Authorization': 'Bearer ' + token });
+      let options: {
+        headers?: HttpHeaders
+      } = {
+        headers: headers
+      };
+      return this.http.get<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/getcart/'+cartId,options);
+  
+    
+    
   }
 
   private async getOrCreateCartId(){

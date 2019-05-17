@@ -24,15 +24,18 @@ export class ProductCardComponent implements OnInit {
   getQuantity(){
 
     if(!this.shoppingCart) return 0;
-    let item=null;
+  
 
-    item=this.shoppingCart.items.forEach(element =>{
-      if(element.productId === this.product.id){
-               return element;
-      } 
-    })
-
-    return item ? item.cartCount:0;
+    for(let i=0;i<this.shoppingCart.items.length;i++){
+      if(this.shoppingCart.items[i].productId === this.product.id){
+        
+        return this.shoppingCart.items[i].cartCount ?this.shoppingCart.items[i].cartCount:0;
+      }
+    }
+   
+     
+    
+    
   }
 
   ngOnInit() {
