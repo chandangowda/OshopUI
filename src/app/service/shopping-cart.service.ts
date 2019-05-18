@@ -4,9 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { ShoppingCartResponse } from 'src/model/shoppingCartResponse';
 import { Product } from 'src/model/product';
-import {take } from 'rxjs/operators';
-import { switchMap } from 'rxjs/operators';
-import { from } from 'rxjs';
+
 
 
 @Injectable({
@@ -26,6 +24,22 @@ export class ShoppingCartService {
     };
 
     return this.http.post<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/savecart',{dateCreated:new Date().getTime()},options)
+
+  }
+
+  async removeFromCart(product:Product):Promise<Observable<ShoppingCartResponse>>{
+    console.log('remobe')
+    let cartId= await   this.getOrCreateCartId();
+    
+    let token=this.cookieService.get('access_token');  
+    let headers = new HttpHeaders({ 'Content-type': 'application/json; charset=utf-8', 'Authorization': 'Bearer ' + token });
+    let options: {
+      headers?: HttpHeaders
+    } = {
+      headers: headers
+    };
+
+    return this.http.delete<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/deleteProductById/'+cartId+'/'+product.id,options)
 
   }
 
@@ -75,8 +89,7 @@ export class ShoppingCartService {
         headers: headers
       };
   
-      let cartResponse=this.http.post<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/findbycartproid/'+cartId+'/'+product.id,{},options)
-      cartResponse.pipe(take(1)).subscribe(res=>console.log(res));
+     return this.http.post<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/findbycartproid/'+cartId+'/'+product.id,{},options)
     }
   
 }
