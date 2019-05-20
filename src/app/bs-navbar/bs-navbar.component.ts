@@ -5,6 +5,8 @@ import { SharedService } from '../util/shared.service';
 import { Router } from '@angular/router';
 import { User } from 'src/model/user';
 import { Subscription } from 'rxjs';
+import { ShoppingCartService } from '../service/shopping-cart.service';
+import { ShoppingCart } from 'src/model/shoppingCart';
 
 @Component({
   selector: 'bs-navbar',
@@ -16,10 +18,15 @@ export class BsNavbarComponent implements OnInit {
   tokenValue: boolean;
   user: User;
   adminFlag: boolean = false;
+   shoppingCartCount:number;
 
-  constructor(private authService: AuthService, private cookieService: CookieService, private data: SharedService, private route: Router) { }
+  constructor(private authService: AuthService, 
+    private cookieService: CookieService, 
+    private data: SharedService,
+     private route: Router,
+     private shoppingCartService:ShoppingCartService) { }
 
-  ngOnInit() {
+   async ngOnInit() {
 
     this.data.currentTokenValue.subscribe(flag => {
       this.tokenValue = flag
@@ -40,9 +47,15 @@ export class BsNavbarComponent implements OnInit {
     
     });
 
+       let cartres=await this.shoppingCartService.getCart();
 
-
-    
+       cartres.subscribe(cart=>{
+           let  shoppingcart:ShoppingCart =cart.cartData[0];
+           this.shoppingCartCount=0;
+           shoppingcart.items.forEach(element=>{
+             this.shoppingCartCount+=element.cartCount;
+           })
+       })
 
     
 

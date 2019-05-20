@@ -1,25 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/model/product';
-import { ShoppingCartService } from '../service/shopping-cart.service';
 import { ShoppingCart } from 'src/model/shoppingCart';
+import { ShoppingCartService } from '../service/shopping-cart.service';
 import {take } from 'rxjs/operators';
 
 
-
 @Component({
-  selector: 'product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css']
+  selector: 'product-quantity',
+  templateUrl: './product-quantity.component.html',
+  styleUrls: ['./product-quantity.component.css']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductQuantityComponent implements OnInit {
 
   @Input('product')product:Product;
-  @Input('show-actions')showActions:boolean=true;
   @Input('shoping-cart')shoppingCart:ShoppingCart;
   countNumber:number;
 
-  constructor(private cartService:ShoppingCartService) { }
-
+  
   addToCart(){
     this.cartService.addToCart(this.product).then(res=>{
         res.pipe(take(1)).subscribe(response=>{
@@ -29,7 +26,14 @@ export class ProductCardComponent implements OnInit {
     });
   }
 
-  
+  removeFromCart(){
+    this.cartService.removeFromCart(this.product).then(res =>{
+      res.subscribe(response =>{
+        this.shoppingCart=response.cartData[0];
+        this.getQuantity();
+      })
+    });
+  }
 
   getQuantity(){
      
@@ -52,6 +56,9 @@ export class ProductCardComponent implements OnInit {
     
     
   }
+
+
+  constructor(private cartService:ShoppingCartService) { }
 
   ngOnInit() {
   }

@@ -91,5 +91,19 @@ export class ShoppingCartService {
   
      return this.http.post<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/findbycartproid/'+cartId+'/'+product.id,{},options)
     }
+
+    async clearCart(){
+      let cartId=await this.getOrCreateCartId();
+      let token=this.cookieService.get('access_token');  
+      let headers = new HttpHeaders({ 'Content-type': 'application/json; charset=utf-8', 'Authorization': 'Bearer ' + token });
+      let options: {
+        headers?: HttpHeaders
+      } = {
+        headers: headers
+      };
+      return this.http.delete<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/clearProductById/'+cartId,options);
+  
+    
+    }
   
 }

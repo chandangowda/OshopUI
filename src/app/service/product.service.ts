@@ -70,5 +70,17 @@ export class ProductService {
     return this.http.delete('http://localhost:8777/product-api/product/deleteproduct?productid='+productid,options)
   }
 
+
+  getProductByIds(id):Observable<ProductResponse>{
+    let token=this.cookieService.get('access_token');  
+    let headers = new HttpHeaders({ 'Content-type': 'application/json; charset=utf-8', 'Authorization': 'Bearer ' + token });
+    let options: {
+      headers?: HttpHeaders
+    } = {
+      headers: headers
+    };
+    return this.http.post<ProductResponse>('http://localhost:8777/product-api/product/getproducts/',id,options)
+  }
+
   
 }
