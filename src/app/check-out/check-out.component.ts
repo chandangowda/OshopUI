@@ -45,7 +45,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
       item: this.items.map(element => {
         return {
           productId: element.productId,
-          quantity: element.cartCount,
+          cartCount: element.cartCount,
           totalPrice: this.getTotalPrice(element.productId, element.cartCount)
         }
       })
