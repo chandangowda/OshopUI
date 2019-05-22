@@ -22,7 +22,8 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
   constructor(private shoppingCartService: ShoppingCartService
     , private productService: ProductService,
-    private orderService:OrderService) { }
+    private orderService:OrderService,
+    private shopingCartService:ShoppingCartService) { }
 
   async ngOnInit() {
     let cartres = await this.shoppingCartService.getCart();
@@ -57,6 +58,11 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     }
 
     this.orderService.saveOrder(order).subscribe(res=>console.log());
+    this.shopingCartService.clearCart().then(res=>{
+      res.subscribe(response=>{
+        console.log()
+      })
+    });
   }
 
   ngOnDestroy() {

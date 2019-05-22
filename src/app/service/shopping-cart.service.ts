@@ -24,7 +24,8 @@ export class ShoppingCartService {
     };
 
     return this.http.post<ShoppingCartResponse>('http://localhost:8777/product-api/shoppingcart/savecart',{dateCreated:new Date().getTime()},options)
-
+    
+  
   }
 
   async removeFromCart(product:Product):Promise<Observable<ShoppingCartResponse>>{

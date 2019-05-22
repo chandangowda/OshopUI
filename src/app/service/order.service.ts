@@ -21,7 +21,7 @@ export class OrderService {
       headers: headers
     };
 
-    return this.http.post<OrderResponse>('http://localhost:8777/product-api/shoppingcart/savecart',order,options)
+    return this.http.post<OrderResponse>('http://localhost:8777/product-api/order/saveOrder',order,options)
 
   }
 
