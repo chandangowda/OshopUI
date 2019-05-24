@@ -36,6 +36,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 import { OrderService } from './service/order.service';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 
 
 
@@ -79,6 +80,7 @@ const routes: Routes = [
     ProductCardComponent,
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
+    ShippingFormComponent,
 
   ],
   imports: [
