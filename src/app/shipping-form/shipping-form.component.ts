@@ -6,6 +6,7 @@ import { ShoppingCart } from 'src/model/shoppingCart';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { ProductService } from '../service/product.service';
 import { User } from 'src/model/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'shipping-form',
@@ -20,7 +21,8 @@ export class ShippingFormComponent implements OnInit {
 
   constructor(private orderService: OrderService, 
     private shopingCartService: ShoppingCartService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private router:Router) { }
 
   ngOnInit() {
   }
@@ -56,6 +58,7 @@ export class ShippingFormComponent implements OnInit {
         console.log()
       })
     });
+    this.router.navigate(['/order-success']);
   }
 
   getTotalPrice(productId, cartCount) {
