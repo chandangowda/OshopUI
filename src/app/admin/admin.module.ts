@@ -29,10 +29,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    DataTableModule.forRoot(),
+    DataTableModule,
+    SharedModule,
     RouterModule.forChild(routes),
     NgbModule.forRoot(),
-    SharedModule
+    
   ],
   providers:[
     AdminAuthGuardService

@@ -10,8 +10,17 @@ import { OrderService } from 'src/app/shared/services/order.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular7-data-table';
 
 @NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    CustomFormsModule,
+    DataTableModule.forRoot()
+  ],
   declarations: [
     ProductCardComponent,
     ProductQuantityComponent,
@@ -19,9 +28,9 @@ import { UserService } from 'src/app/shared/services/user.service';
   exports: [
     ProductCardComponent,
     ProductQuantityComponent,
-  ],
-  imports: [
-    CommonModule
+    FormsModule,
+    CustomFormsModule,
+    DataTableModule.forRoot().providers,
   ],
   providers:[
     AuthService, 
