@@ -19,22 +19,22 @@ import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './service/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 
 import { SharedService } from './util/shared.service';
 import { AuthGuardService } from './auth-guard.service';
-import { UserService } from './service/user.service';
-import { AdminAuthGuardService } from './service/admin-auth-guard.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { AdminAuthGuardService } from 'src/app/shared/services/admin-auth-guard.service';
 import { ProductFormComponent } from './product-form/product-form.component';
-import { CategoryService } from './service/category.service';
-import { ProductService } from './service/product.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { CustomFormsModule } from 'ng2-validation';
 import { DataTableModule } from 'angular7-data-table';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
-import { OrderService } from './service/order.service';
+import { OrderService } from 'src/app/shared/services/order.service';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 

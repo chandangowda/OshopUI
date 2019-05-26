@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ShoppingCart } from 'src/model/shoppingCart';
-import { Product } from 'src/model/product';
-import { ProductService } from '../service/product.service';
-import { Item } from 'src/model/item';
+import { ShoppingCart } from 'src/app/shared/model/shoppingCart';
+import { Product } from 'src/app/shared/model/product';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { Item } from 'src/app/shared/model/item';
 
 @Component({
   selector: 'shopping-cart-summary',

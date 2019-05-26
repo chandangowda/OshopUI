@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { SharedService } from '../util/shared.service';
+import { SharedService } from '../../util/shared.service';
 import { Observable,of, BehaviorSubject } from 'rxjs';
 import { map,switchMap, catchError } from 'rxjs/operators';
-import { UserService } from './user.service';
-import { AuthService } from './auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 

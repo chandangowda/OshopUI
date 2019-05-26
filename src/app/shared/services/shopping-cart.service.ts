@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { ShoppingCartResponse } from 'src/model/shoppingCartResponse';
-import { Product } from 'src/model/product';
+import { ShoppingCartResponse } from 'src/app/shared/model/shoppingCartResponse';
+import { Product } from 'src/app/shared/model/product';
 
 
 

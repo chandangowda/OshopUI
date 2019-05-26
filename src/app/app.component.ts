@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from './util/shared.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
-import { UserService } from './service/user.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-root',

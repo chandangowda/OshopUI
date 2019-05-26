@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService } from 'src/app/service/product.service';
-import { Product } from 'src/model/product';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { Product } from 'src/app/shared/model/product';
 import { Subscription } from 'rxjs';
 import { DataTableResource } from 'angular7-data-table';
 

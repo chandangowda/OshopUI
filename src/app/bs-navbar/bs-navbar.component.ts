@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedService } from '../util/shared.service';
 import { Router } from '@angular/router';
-import { User } from 'src/model/user';
+import { User } from 'src/app/shared/model/user';
 import { Subscription } from 'rxjs';
-import { ShoppingCartService } from '../service/shopping-cart.service';
-import { ShoppingCart } from 'src/model/shoppingCart';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
+import { ShoppingCart } from 'src/app/shared/model/shoppingCart';
 
 @Component({
   selector: 'bs-navbar',

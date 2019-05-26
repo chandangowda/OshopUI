@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { OrderResponse } from 'src/model/orderResponse';
+import { OrderResponse } from 'src/app/shared/model/orderResponse';
 import { Observable } from 'rxjs';
-import { User } from 'src/model/user';
+import { User } from 'src/app/shared/model/user';
 
 @Injectable({
   providedIn: 'root'

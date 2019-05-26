@@ -1,8 +1,8 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
-import { CategoryService } from '../service/category.service';
-import { Category } from 'src/model/category';
-import { Product } from 'src/model/product';
-import { ProductService } from '../service/product.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { Category } from 'src/app/shared/model/category';
+import { Product } from 'src/app/shared/model/product';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 

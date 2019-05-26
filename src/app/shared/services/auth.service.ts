@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { SharedService } from '../util/shared.service';
+import { SharedService } from '../../util/shared.service';
 import { Observable } from 'rxjs';
-import { UserResponse } from 'src/model/userResponse';
-import { UserService } from './user.service';
-import { User } from 'src/model/user';
+import { UserResponse } from 'src/app/shared/model/userResponse';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/model/user';
 
 
 @Injectable({

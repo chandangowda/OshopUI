@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { Product } from 'src/model/product';
-import { ProductResponse } from 'src/model/productResponse';
+import { Product } from 'src/app/shared/model/product';
+import { ProductResponse } from 'src/app/shared/model/productResponse';
 import { Observable } from 'rxjs';
 
 @Injectable({
