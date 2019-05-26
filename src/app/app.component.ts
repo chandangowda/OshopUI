@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { SharedService } from './util/shared.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';

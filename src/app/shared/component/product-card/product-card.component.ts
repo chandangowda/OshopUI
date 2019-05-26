@@ -13,7 +13,7 @@ import {take } from 'rxjs/operators';
 })
 export class ProductCardComponent implements OnInit {
 
-  @Input('product')product:Product;
+  @Input('product')product:Product=new Product();
   @Input('show-actions')showActions:boolean=true;
   @Input('shoping-cart')shoppingCart:ShoppingCart;
   countNumber:number;

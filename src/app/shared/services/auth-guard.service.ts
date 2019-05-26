@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { SharedService } from './util/shared.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
-import { SharedService } from '../util/shared.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/user';
 import { Subscription } from 'rxjs';
