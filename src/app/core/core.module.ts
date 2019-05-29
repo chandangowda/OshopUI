@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BsNavbarComponent } from './components/bs-navbar/bs-navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     SharedModule,
     MaterialModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgbModule.forRoot()
   ],
   exports:[
     BsNavbarComponent

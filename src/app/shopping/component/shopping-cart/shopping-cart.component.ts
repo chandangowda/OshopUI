@@ -4,6 +4,7 @@ import { ShoppingCart } from 'src/app/shared/model/shoppingCart';
 import { Item } from 'src/app/shared/model/item';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/model/product';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
 
 
   constructor(private shopingCartService: ShoppingCartService,
-    private productService: ProductService) { }
+    private productService: ProductService,private sharedService:SharedService) { }
 
   async  ngOnInit() {
     let cartres = await this.shopingCartService.getCart();
@@ -85,6 +86,8 @@ export class ShoppingCartComponent implements OnInit {
     res.subscribe(response => {
       console.log(response);
     })
+    this.sharedService.changeShoppingCart(new ShoppingCart());
   }
+  
 
 }

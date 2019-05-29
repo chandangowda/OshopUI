@@ -47,15 +47,15 @@ export class BsNavbarComponent implements OnInit {
     
     });
 
-       let cartres=await this.shoppingCartService.getCart();
-
-       cartres.subscribe(cart=>{
-           let  shoppingcart:ShoppingCart =cart.cartData[0];
-           this.shoppingCartCount=0;
-           shoppingcart.items.forEach(element=>{
-             this.shoppingCartCount+=element.cartCount;
-           })
-       })
+    this.data.currentShoopingValue.subscribe(shopingcart =>{
+      this.shoppingCartCount=0;
+      if(shopingcart && shopingcart.items){
+        shopingcart.items.forEach(element=>{
+          this.shoppingCartCount+=element.cartCount;
+        })
+      }
+      
+     })
 
     
 

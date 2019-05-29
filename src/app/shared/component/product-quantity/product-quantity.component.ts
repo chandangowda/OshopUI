@@ -3,6 +3,7 @@ import { Product } from 'src/app/shared/model/product';
 import { ShoppingCart } from 'src/app/shared/model/shoppingCart';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import {take } from 'rxjs/operators';
+import { SharedService } from '../../services/shared.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ProductQuantityComponent implements OnInit {
     this.cartService.addToCart(this.product).then(res=>{
         res.pipe(take(1)).subscribe(response=>{
           this.shoppingCart=response.cartData[0];
+          this.sharedService.changeShoppingCart( this.shoppingCart);
           this.getQuantity();
         })
     });
@@ -30,6 +32,7 @@ export class ProductQuantityComponent implements OnInit {
     this.cartService.removeFromCart(this.product).then(res =>{
       res.subscribe(response =>{
         this.shoppingCart=response.cartData[0];
+        this.sharedService.changeShoppingCart( this.shoppingCart);
         this.getQuantity();
       })
     });
@@ -58,7 +61,7 @@ export class ProductQuantityComponent implements OnInit {
   }
 
 
-  constructor(private cartService:ShoppingCartService) { }
+  constructor(private cartService:ShoppingCartService,private sharedService:SharedService) { }
 
   ngOnInit() {
   }

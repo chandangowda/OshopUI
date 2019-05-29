@@ -7,6 +7,7 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.servi
 import { ProductService } from 'src/app/shared/services/product.service';
 import { User } from 'src/app/shared/model/user';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'shipping-form',
@@ -22,7 +23,8 @@ export class ShippingFormComponent implements OnInit {
   constructor(private orderService: OrderService, 
     private shopingCartService: ShoppingCartService,
     private productService: ProductService,
-    private router:Router) { }
+    private router:Router,
+    private sharedService:SharedService) { }
 
   ngOnInit() {
   }
@@ -58,11 +60,11 @@ export class ShippingFormComponent implements OnInit {
         console.log()
       })
     });
+    this.sharedService.changeShoppingCart(new ShoppingCart());
     this.router.navigate(['/order-success']);
   }
 
   getTotalPrice(productId, cartCount) {
-    let productTotalprice = 0;
     for (let i = 0; i < this.product.length; i++) {
       let singleProduct = this.product[i]
       if (singleProduct.id === productId) {

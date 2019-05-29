@@ -3,6 +3,7 @@ import { Product } from 'src/app/shared/model/product';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import { ShoppingCart } from 'src/app/shared/model/shoppingCart';
 import {take } from 'rxjs/operators';
+import { SharedService } from '../../services/shared.service';
 
 
 
@@ -18,12 +19,13 @@ export class ProductCardComponent implements OnInit {
   @Input('shoping-cart')shoppingCart:ShoppingCart;
   countNumber:number;
 
-  constructor(private cartService:ShoppingCartService) { }
+  constructor(private cartService:ShoppingCartService,private sharedService:SharedService) { }
 
   addToCart(){
     this.cartService.addToCart(this.product).then(res=>{
         res.pipe(take(1)).subscribe(response=>{
           this.shoppingCart=response.cartData[0];
+          this.sharedService.changeShoppingCart( this.shoppingCart);
           this.getQuantity();
         })
     });
