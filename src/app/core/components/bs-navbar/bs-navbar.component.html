@@ -35,7 +35,7 @@
         <a ngbDropdownToggle class="nav-link dropdown-toggle " id="dropdown01" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" *ngIf="user">{{user.userName}}</a>
         <div ngbDropdownMenu  *ngIf="user" class="dropdown-menu dropdown-menu-left"   aria-labelledby="dropdown01">
-          <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
+          <a class="dropdown-item" routerLinkc="/my/orders">My Orders</a>
           <ng-container *ngIf="adminFlag">
             <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
             <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>

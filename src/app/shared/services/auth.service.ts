@@ -111,7 +111,7 @@ export class AuthService {
 
   startInterval(){
     console.log('refreshstarttokenCall');
-   this.loginSubscription= interval(80000).subscribe(x =>this.obtainRefreshToken())
+   this.loginSubscription= interval(550000).subscribe(x =>this.obtainRefreshToken())
   }
 
   stopInterval(){
