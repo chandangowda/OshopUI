@@ -3,10 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/services/shared.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserResponse } from 'src/app/shared/model/userResponse';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/model/user';
+import {interval} from 'rxjs';
 
 
 @Injectable({
@@ -15,6 +16,8 @@ import { User } from 'src/app/shared/model/user';
 export class AuthService {
 
   user:any={};
+
+  loginSubscription:Subscription;
 
 
   constructor(private http: HttpClient, 
@@ -45,17 +48,30 @@ export class AuthService {
         localStorage.setItem('user',JSON.stringify(userInfo));
         this.saveToken(response);      
       });
+  }
 
-     
-      
-
+  obtainRefreshToken() {
+    let params = new URLSearchParams();
+    params.append('refresh_token', localStorage.getItem('refresh_token'));
+    params.append('grant_type', 'refresh_token');
+    params.append('client_id', 'client_id');
+    let headers = new HttpHeaders({ 'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic ' + btoa("client_id:secret") });
+    let options = {
+      headers: headers
+    }
+    this.http.post("http://localhost:8777/auth-api/oauth/token", params.toString(), options)
+      .subscribe(response => {
+        this.saveToken(response);      
+      });
   }
 
   saveToken(token) {
     var expireDate = new Date().getTime() + (1000 * token.expires_in);
     this.cookieService.set("access_token", token.access_token, expireDate);
     localStorage.setItem('access_token',token.access_token);
+    localStorage.setItem('refresh_token',token.refresh_token);
     this.data.changeflag(true);
+    this.startInterval();
   }
 
   makeid(length) {
@@ -86,9 +102,23 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user')
     this.cookieService.delete('access_token');
+    this.stopInterval();
   }
 
    appUser() :Observable<UserResponse>{
     return this.userService.getUser()
+  }
+
+  startInterval(){
+    console.log('refreshstarttokenCall');
+   this.loginSubscription= interval(80000).subscribe(x =>this.obtainRefreshToken())
+  }
+
+  stopInterval(){
+    console.log('refreshstoptokenCall');
+
+    if(this.loginSubscription){
+      this.loginSubscription.unsubscribe();
+    }
   }
 }
